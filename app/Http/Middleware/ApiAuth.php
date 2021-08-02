@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
-
-class Admin
+class ApiAuth
 {
-
     /**
      * Handle an incoming request.
      *
@@ -15,11 +14,8 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-
-    
+    public function handle(Request $request, Closure $next)
     {
-        
-        return $next($request); 
+        return $next($request);
     }
 }

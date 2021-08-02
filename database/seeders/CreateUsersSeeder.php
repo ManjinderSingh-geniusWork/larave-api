@@ -19,14 +19,19 @@ class CreateUsersSeeder extends Seeder
         $user = [
             [
                 'name' => 'Admin',
-                'email' => 'admin@testdomain.com',
+                'user_name' => 'Admin_user',
+                'email' => 'admin@onlinewebtutorblog.com',
                 'role' => 'admin',
+                'email_verified'=>1,
+
                 'password' => bcrypt('123456'),
             ],
             [
                 'name' => 'User',
-                'email' => 'user@gmail.com',
+                'user_name' => 'test_user',
+                'email' => 'normal@onlinewebtutorblog.com',
                 'role' => 'user',
+                'email_verified'=>1,
                 'password' => bcrypt('123456'),
             ],
         ];

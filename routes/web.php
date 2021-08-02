@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('register', [Users::class, 'register'])->name('user.register');
+Route::get('/email/verify/{id}/{hash}', [Users::class, 'verify_email'])->name('verification.verify');

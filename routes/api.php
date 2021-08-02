@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MailController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,27 +20,29 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
 
-Route::group([
-    'prefix'=>'api/v1',
-    'middleware' => ['jwt.verify']], 
+// API Routes for customers/users
+Route::middleware(['jwt.verify'])->group(
     function() {
         Route::get('logout', [ApiController::class, 'logout']);
-        Route::get('profile', [ApiController::class, 'user_profile']);
+        Route::get('get_user', [ApiController::class, 'get_user']);
+        Route::post('update-profile', [ApiController::class, 'porfile_edit']);
+        Route::post('email/verify', [ApiController::class, 'verify_email']);
+
     }
 );
-Route::group([
-    'prefix'=>'api/v1/admin',
-    'middleware' => ['admin']], 
+
+// API Routes for Admin
+Route::middleware(['jwt.verify'])->prefix('admin')->group(
     function() {
         Route::get('logout', [ApiController::class, 'logout']);
         Route::get('list_user', [ApiController::class, 'admin_get_users']);
+        Route::post('/mail/sign-up-invitation', [MailController::class, 'admin_invite_user']);
     }
 );

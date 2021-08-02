@@ -146,7 +146,7 @@ class ApiController extends Controller
         $data = $request->only('name','user_name', 'avtar');
         $validator = Validator::make($data, [
             'name' => 'required|string',
-            'user_name'=>'required |unique:users| min:4 |max:20',
+            'user_name'=>'required |unique:users,user_name,'.$user->id.' | min:4 |max:20 ',
             'avtar' => 'mimes:jpeg,jpg,png,gif',
             // 'avtar' => 'dimensions:min_width=256,min_height=256,max_width=256,max_height=256',
         ]);
@@ -171,14 +171,14 @@ class ApiController extends Controller
         }
         $users->save();
 
-        $data[] = [
+        $data = [
             'id'=>$users->id,
             'name'=>$users->name,
             'user_name'=>$users->user_name,
             'avtar'=>Storage::url($users->avtar),
-            'status'=>200,
+        
         ];
-        return response()->json($data);
+        return response()->json($data,    200,);
 
     }
     public function verify_email(Request $request){

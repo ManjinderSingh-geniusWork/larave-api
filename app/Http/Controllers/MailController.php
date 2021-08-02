@@ -24,12 +24,8 @@ class MailController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         $res = Mail::to($request->email)->send(new UserInvitation());
-        var_dump($res);die;
-        if($res == 1){
-            return response()->json(['success' => true,'user' => 'Email sent']);
-        }
-        return response()->json(['success' =>false,'message' => 'Email Failed']);
-
+        return response()->json(['success' => true,'user' => 'Email sent']);
+       
 
     }
 }

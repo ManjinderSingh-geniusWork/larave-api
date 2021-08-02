@@ -20,7 +20,7 @@ class CreateUsersSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'user_name' => 'Admin_user',
-                'email' => 'admin@onlinewebtutorblog.com',
+                'email' => 'admin@domain.com',
                 'role' => 'admin',
                 'email_verified'=>1,
 
@@ -29,7 +29,7 @@ class CreateUsersSeeder extends Seeder
             [
                 'name' => 'User',
                 'user_name' => 'test_user',
-                'email' => 'normal@onlinewebtutorblog.com',
+                'email' => 'normal@domain.com',
                 'role' => 'user',
                 'email_verified'=>1,
                 'password' => bcrypt('123456'),
